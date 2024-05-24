@@ -6,30 +6,32 @@ class Nodo:
 def crear_lista_adyacencia(nodos, aristas, dirigido=False):
     lista_adyacencia = [[] for _ in range(len(nodos))]
     for nodo1, nodo2 in aristas:
-        lista_adyacencia[nodos.index(nodo1)].append(Nodo(nodo2))
+        lista_adyacencia[nodos.index(nodo1)].append(Nodo(nodo2)) #Se agrega el nodo1 a la lista de adyacencia del nodo 2
         if not dirigido:
-            lista_adyacencia[nodos.index(nodo2)].append(Nodo(nodo1))
+            lista_adyacencia[nodos.index(nodo2)].append(Nodo(nodo1)) #Se agrega el nodo 2 a la lista de adyacencia del nodo1
     return lista_adyacencia
 
 def imprimir_lista_adyacencia(lista_adyacencia, nodos):
-    for i, vecinos in enumerate(lista_adyacencia):
+    for i, vecinos in enumerate(lista_adyacencia): #Vecinos = Nodos adyacentes
         vecinos_valores = [nodo.valor for nodo in vecinos]
         print(f"{nodos[i]}: {' -> '.join(vecinos_valores)}")
 
 def crear_matriz_adyacencia(nodos, aristas, dirigido=False):
-    n = len(nodos)
+    n = len(nodos) #n= Numero de nodos
+    #Se crea una matriz de adyacencia n*n inicializada en 0
     matriz_adyacencia = [[0] * n for _ in range(n)]
+    #Si hay una arista del nodo i al nodo j el valor se actualiza a 1
     for nodo1, nodo2 in aristas:
         i, j = nodos.index(nodo1), nodos.index(nodo2)
         matriz_adyacencia[i][j] = 1
         if not dirigido:
-            matriz_adyacencia[j][i] = 1
+            matriz_adyacencia[j][i] = 1 
     return matriz_adyacencia
 
 def imprimir_matriz_adyacencia(nodos, matriz_adyacencia):
     print("  ", " ".join(nodos))
-    for i, nodo in enumerate(nodos):
-        print(nodo, " ".join(map(str, matriz_adyacencia[i])))
+    for i, nodo in enumerate(nodos): #Enumarate: Asigna un indice a cada nodo
+        print(nodo, " ".join(map(str, matriz_adyacencia[i]))) #Imprime una fila de la matriz correspondiente al nodo actual
 
 def leer_grafo(separador, dirigido=False):
     nodos = input("Ingresa los nodos del grafo separados por comas (ejemplo: A,B,C,D): ").split(",")
