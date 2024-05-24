@@ -5,10 +5,12 @@ class Nodo:
 
 def crear_lista_adyacencia(nodos, aristas, dirigido=False):
     lista_adyacencia = [[] for _ in range(len(nodos))]
+    #Itera sobre cada arista 
     for nodo1, nodo2 in aristas:
-        lista_adyacencia[nodos.index(nodo1)].append(Nodo(nodo2)) #Se agrega el nodo1 a la lista de adyacencia del nodo 2
+        #Agrega el nodo 2 a la lista de adyacencia del nodo 1
+        lista_adyacencia[nodos.index(nodo1)].append(Nodo(nodo2)) 
         if not dirigido:
-            lista_adyacencia[nodos.index(nodo2)].append(Nodo(nodo1)) #Se agrega el nodo 2 a la lista de adyacencia del nodo1
+            lista_adyacencia[nodos.index(nodo2)].append(Nodo(nodo1)) #Se agrega el nodo 1 a la lista de adyacencia del nodo2
     return lista_adyacencia
 
 def imprimir_lista_adyacencia(lista_adyacencia, nodos):
