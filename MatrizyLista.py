@@ -20,13 +20,15 @@ def crear_matriz_adyacencia(nodos, aristas, dirigido=False):
     n = len(nodos) #n= Numero de nodos
     #Se crea una matriz de adyacencia n*n inicializada en 0
     matriz_adyacencia = [[0] * n for _ in range(n)]
+    vAristas = []
     #Si hay una arista del nodo i al nodo j el valor se actualiza a 1
     for nodo1, nodo2 in aristas:
         i, j = nodos.index(nodo1), nodos.index(nodo2)
         matriz_adyacencia[i][j] = 1
         if not dirigido:
-            matriz_adyacencia[j][i] = 1 
-    return matriz_adyacencia
+            matriz_adyacencia[j][i] = 1
+        vAristas.append((nodo1, nodo2))
+    return matriz_adyacencia, vAristas
 
 def imprimir_matriz_adyacencia(nodos, matriz_adyacencia):
     print("  ", " ".join(nodos))
@@ -57,12 +59,12 @@ def main_lista_adyacencia_no_dirigido():
 
 def main_matriz_adyacencia_dirigido():
     nodos, aristas, dirigido = leer_grafo("->", True)
-    matriz_adyacencia = crear_matriz_adyacencia(nodos, aristas, dirigido)
+    matriz_adyacencia, vAristas = crear_matriz_adyacencia(nodos, aristas, dirigido)
     imprimir_matriz_adyacencia(nodos, matriz_adyacencia)
 
 def main_matriz_adyacencia_no_dirigido():
     nodos, aristas, dirigido = leer_grafo("-", False)
-    matriz_adyacencia = crear_matriz_adyacencia(nodos, aristas, dirigido)
+    matriz_adyacencia, vAristas = crear_matriz_adyacencia(nodos, aristas, dirigido)
     imprimir_matriz_adyacencia(nodos, matriz_adyacencia)
 
 def mostrar_menu():
